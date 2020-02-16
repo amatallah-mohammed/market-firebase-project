@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
+</head>
+<style>
+    .btnview{
+        background: #E91E63;
+        border-color: #E91E63;
+        color: white;
+        padding: 6px 48px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .btncart{
+        background: #E91E63;
+        border-color: #E91E63;
+        color: white;
+        margin-left: 5%;
+        padding: 6px 25px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+</style>
+<body>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark" style="background-color: #E91E63!important">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="home.html"><i class="fas fa-home"> Home </i></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    products
+                </a>
+
+
+                <div class="dropdown-menu drop" aria-labelledby="navbarDropdown">
+
+                    <a class="dropdown-item" href="Catenary.html">Catenary</a>
+                    <a class="dropdown-item" href="Bracelets.html">Bracelets</a>
+                    <a class="dropdown-item" href="Rings.html">Rings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="Throat.html">Throat</a>
+                    <a class="dropdown-item" href="Set.html">Set</a>
+
+                </div>
+
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="signup.html"><i class="fas fa-user"> SignUp </i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="login.html"><i class="fas fa-user"> LogIn </i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><button style="border: none; background: #E91E63;color: white;font-weight: bold;" id="logout">LogOut</button></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+
+<div>
+    <div class="container">
+
+        <div class="row" id="p_list">
+
+
+
+
+
+        </div>
+    </div>
+</div>
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyDkS6CylziMtfEJ0dbyBggxl4aKqOPEbps",
+        authDomain: "market-site-75034.firebaseapp.com",
+        databaseURL: "https://market-site-75034.firebaseio.com",
+        projectId: "market-site-75034",
+        storageBucket: "market-site-75034.appspot.com",
+        messagingSenderId: "8146776573",
+        appId: "1:8146776573:web:82b50e67ebec3029bbe994"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var dbObject=firebase.firestore();
+    var storageObject=firebase.storage();
+    var authObject=firebase.auth();
+    dbObject.collection("prodcuts").where("type" , "==" ,"خواتم" ).get().then(function (rows) {
+        //console.log(rows);
+
+
+        rows.forEach(function (row) {
+            // alert("hi");
+
+
+            var doc=row.data();
+            console.log(doc);
+            var html='<div class="col-md-4">\n' +
+                '          <div class="card mb-4 shadow-sm">\n' +
+                '            <img class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" src="'+doc.product_img+'" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect>\n' +
+                '            <div class="card-body">\n' +
+                '              <p class="card-text"><center>'+doc.product_title+'</center></p>\n' +
+                '              <p class="card-text"><center>'+doc.product_price+' $</center></p>\n' +
+                '              <div class="d-flex  align-items-center">\n' +
+
+                '                  <button type="button" class="btn btn-sm btn-outline-secondary btnview">Details</button>\n' +
+                '                  <button type="button" class="btn btn-sm btn-outline-secondary btncart">Add to Cart</button>\n' +
+
+
+                '              </div>\n' +
+                '            </div>\n' +
+                '          </div>\n' +
+                '        </div>';
+            p_list.innerHTML+=html;
+
+
+
+        });
+
+    }).catch(function (err) {
+        alert(err.message)
+
+    })
+
+
+
+    var logout=document.getElementById("logout");
+    logout.addEventListener("click",function () {
+        authObject.signOut();
+        alert("ok");
+    })
+
+</script>
+
+</body>
+</html>
+
+

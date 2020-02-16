@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
+</head>
+<style>
+    .btnview{
+        background: #E91E63;
+        border-color: #E91E63;
+        color: white;
+        padding: 6px 48px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+</style>
+<body>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark" style="background-color: #E91E63!important">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="home.html">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="product.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    products
+                </a>
+
+
+                <div class="dropdown-menu drop" aria-labelledby="navbarDropdown">
+
+                        <a class="dropdown-item" href="Catenary.html">Catenary</a>
+                        <a class="dropdown-item" href="Bracelets.html">Bracelets</a>
+                        <a class="dropdown-item" href="Rings.html">Rings</a>
+                        <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="Throat.html">Throat</a>
+                                <a class="dropdown-item" href="Set.html">Set</a>
+
+                </div>
+
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="signup.html">SignUp</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="login.html">LogIn</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><button style="border: none; background: #E91E63;color: white;font-weight: bold;" id="logout">LogOut</button></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+
+
+</body>
+</html>
+
+

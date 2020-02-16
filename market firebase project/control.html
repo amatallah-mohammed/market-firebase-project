@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Action</title>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
+</head>
+<body>
+
+<div class="container">
+<table class="table table-light" style="margin-top: 8%;">
+    <thead style="background: #382620ed;color: white;">
+    <tr>
+        <th>Product Name</th>
+        <th>Product Image</th>
+        <th>Product Price</th>
+        <th>Product Description</th>
+        <th colspan=2>Action</th>
+    </tr>
+    </thead>
+    <tbody id="tablepro">
+
+    </tbody>
+</table>
+    <a href="add_product.html"><button id="add_product_btn" class="btn btn-primary">add New Product</button></a>
+</div>
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyDkS6CylziMtfEJ0dbyBggxl4aKqOPEbps",
+        authDomain: "market-site-75034.firebaseapp.com",
+        databaseURL: "https://market-site-75034.firebaseio.com",
+        projectId: "market-site-75034",
+        storageBucket: "market-site-75034.appspot.com",
+        messagingSenderId: "8146776573",
+        appId: "1:8146776573:web:82b50e67ebec3029bbe994"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var dbObject=firebase.firestore();
+    var storageObject=firebase.storage();
+    var authObject=firebase.auth();
+    var protable=document.getElementById("tablepro");
+    var deletebtn=document.getElementById("delete");
+    dbObject.collection("prodcuts").get().then(function (rows) {
+        //console.log(rows);
+
+
+        rows.forEach(function (row) {
+            // alert("hi");
+
+
+            var doc=row.data();
+            //console.log(doc);
+            var html='<td>'+doc.product_title+'</td>\n' +
+                '    <td><img width="40px" height="40px" src='+doc.product_img+'></td>\n' +
+                '    <td>'+doc.product_price+' $</td>\n' +
+                '    <td>'+doc.product_description+'</td>\n' +
+                '    <td><button type="button" class="btn btn-warning">Edit</button></td>\n' +
+                '    <td><button type="button" class="btn btn-danger" onclick="delete_item (this.value);">Delete</button></td>';
+            protable.innerHTML+=html;
+
+
+
+        });
+
+    }).catch(function (err) {
+        alert(err.message)
+
+    });
+
+    function delete_item(val) {
+        console.log("fun Delete");
+
+        dbObject.collection('prodcuts').doc(val).delete();
+    };
+</script>
+
+</body>
+</html>
